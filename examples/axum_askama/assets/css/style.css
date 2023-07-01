@@ -1,0 +1,122 @@
+@import "modules/_fonts.css";
+@import "modules/_vars.css";
+
+* {
+    font-family: 'Inter', apple-system, BlinkMacSystemFont, Roboto, "Helvetica Neue", Arial, sans-serif;
+    margin: 0;
+}
+
+body {
+    font-size: 1.0rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: var(--background);
+    color: var(--primary);
+
+}
+
+.caption {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    text-align: center;
+    font-size: 0.9em;
+    font-weight: 400;
+    color: var(--secondary);
+    margin-bottom: 1.5em;
+    padding: 0.5rem 0;
+
+    & > * {
+        margin: 0;
+    }
+}
+
+a {
+    color: var(--link);
+    text-decoration: none;
+}
+
+h2, h3, h4, h5, h6, p {
+    margin: 0.3rem 0;
+}
+
+h1 {
+    font-size: 3.5em;
+    font-weight: 700;
+}
+
+h2 {
+    font-size: 1.5em;
+    font-weight: 600;
+}
+
+p {
+    font-size: 1em;
+    font-weight: 400;
+    margin-bottom: 1.5rem;
+    line-height: 1.5;
+}
+
+img {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+    max-height: 32rem;
+    border-top: 1px solid #ddd;
+    border-bottom: 1px solid #ddd;
+}
+
+table {
+    border-collapse: separate;
+    border-spacing: 0;
+    margin-bottom: 1.5em;
+    border: 1px solid var(--secondary);
+    border-radius: 0.25em;
+}
+
+table th,
+table td {
+    text-align: left;
+    padding: 0.5em;
+    border-top: 1px solid var(--secondary);
+    border-left: 1px solid var(--secondary);
+
+    &:first-child {
+        border-left: none;
+    }
+}
+
+table th {
+    border-top: none;
+}
+
+section {
+    width: 100%;
+    max-width: 26em;
+    padding: 0, 1em;
+    margin: 0, auto;
+    margin-bottom: 0.5rem;
+    display: flex;
+    flex-direction: column;
+
+    &.full-width {
+        max-width: 100%;
+    }
+}
+
+footer {
+    width: 100%;
+    background-color: var(--background-alt);
+    color: var(--secondary);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+footer section {
+    padding: 1em;
+    margin: 0;
+}

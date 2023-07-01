@@ -1,0 +1,27 @@
+[package]
+name = "creme_bundler"
+version = "0.1.0"
+edition = "2021"
+authors = ["Matthew Taylor <wrapperup4@gmail.com>"]
+description = "This crate is reserved for an upcoming library."
+license = "MIT"
+readme = "README.md"
+
+[dependencies]
+# reqwest = "0.11.18"
+lightningcss = { version = "1.0.0-alpha.43", features = ["browserslist"] }
+# basic-toml = "0.1.2"
+mime = "0.3.17"
+mime_guess = "2.0.4"
+blake3 = "1.4.0"
+hex = "0.4.3"
+thiserror = "1.0.40"
+browserslist-rs = "0.12.4"
+serde = { version = "1.0.167", features = ["derive"] }
+serde_json = "1.0.100"
+once_cell = "1.18.0"
+path-absolutize = "3.1.0"
+
+[features]
+default = []
+browserslist = ["lightningcss/browserslist"]

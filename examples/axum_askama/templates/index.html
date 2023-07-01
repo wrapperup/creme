@@ -1,0 +1,118 @@
+{% extends "base.html" %}
+
+{% block title %}Creme + Axum + Askama{% endblock %}
+
+{% block content %}
+    <section>
+        <div style="display: flex;
+                    align-items: center;
+                    gap: 1rem;
+                    margin: 1rem 0;"
+        >
+            <h1 style="font-size: 6rem;
+                       text-align: center"
+            >
+                Hello!
+            </h1>
+        </div>
+        <h2>Welcome to my Rust Website!</h2>
+        <p>This is a paragraph.</p>
+    </section>
+    <section>
+        <h2>Here's a picture of a cat.</h2>
+        <p>It's a cute cat.</p>
+    </section>
+    <section class="full-width">
+        <img src="{{ asset!("img/cat.jpeg") }}" alt="el gato">
+        <div class="caption">
+            {{ iconify::svg!("solar:cat-broken", width="16")|safe }}
+            <p>This isn't my cat, but it's a cute cat.</p>
+        </div>
+    </section>
+    <section>
+        <h2>Here's a list of things I like:</h2>
+        <p>
+            These are in no particular order, except for cats.
+            <div style="margin-left:-1rem">
+                <ul>
+                    <li>Cats - any kind of cat is a good cat!</li>
+                    <li>Programming - This is a programming website!</li>
+                    <li>Music - I like to listen to it!</li>
+                </ul>
+            </div>
+        </p>
+    </section>
+    <section>
+        <h2>Here's a list of things I don't like:</h2>
+        <p>These are in order of how much I don't like them.
+            <div style="margin-left:-1rem">
+                <ol>
+                    <li>Wasps - no good, not cool!</li>
+                    <li>Spiders - very scary, but friendly!</li>
+                    <li>Snakes - cool, but scary!</li>
+                </ol>
+            </div>
+        </p>
+    </section>
+    <section>
+        <h2>Here's a table of things I like and don't like:</h2>
+        <p>I like table formatting. Deal with it.</p>
+        <table>
+            <thead>
+                <tr>
+                    <th>Like</th>
+                    <th>Don't Like</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Cats</td>
+                    <td>Wasps</td>
+                </tr>
+                <tr>
+                    <td>Programming</td>
+                    <td>Spiders</td>
+                </tr>
+                <tr>
+                    <td>Music</td>
+                    <td>Snakes</td>
+                </tr>
+            </tbody>
+        </table>
+    </section>
+    <section>
+        <h2>Here's a lot of text:</h2>
+        <p>
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+            Nullam euismod, nisl nec aliquam ultricies, nunc nisl
+            ultricies nunc, nec aliquam nunc nisl nec nisi. Donec
+            euismod, nisl nec aliquam ultricies, nunc nisl ultricies
+        </p>
+        <p>
+            nunc, nec aliquam nunc nisl nec nisi. Donec euismod, nisl
+            nec aliquam ultricies, nunc nisl ultricies nunc, nec
+            aliquam nunc nisl nec nisi. Donec euismod, nisl nec
+            aliquam ultricies, nunc nisl ultricies nunc, nec aliquam
+        </p>
+        <p>
+            nunc nisl nec nisi. Donec euismod, nisl nec aliquam
+            ultricies, nunc nisl ultricies nunc, nec aliquam nunc
+            nisl nec nisi. Donec euismod, nisl nec aliquam ultricies,
+            nunc nisl ultricies nunc, nec aliquam nunc nisl nec nisi.
+        </section>
+        <section class="full-width">
+            <img src="{{ asset!("img/cat.jpeg") }}" alt="el gato">
+            <div class="caption">
+                {{ iconify::svg!("solar:shield-warning-broken", width="16")|safe }}
+                <p>Wait. This is the same cat as before!</p>
+            </div>
+        </section>
+        <section>
+            <p>Here's a link to <a href="https://www.google.com">Google</a>. That's all for now, thanks for reading!</p>
+        </section>
+        <footer>
+            <section>
+                &copy; 2023 Matthew Taylor &middot; All rights reserved.
+            </section>
+        </footer>
+{% endblock %}

@@ -1,0 +1,16 @@
+[package]
+name = "creme"
+version = "0.1.0"
+edition = "2021"
+authors = ["Matthew Taylor <wrapperup4@gmail.com>"]
+description = "This crate is reserved for an upcoming library."
+license = "MIT"
+readme = "README.md"
+
+[dependencies]
+bytes = "1.4.0"
+creme_macros = { path = "../creme_macros" }
+http = "0.2.9"
+http-body = "0.4.5"
+tower = "0.4.13"
+tower-http = { version = "0.4.3", features = ["fs"] }

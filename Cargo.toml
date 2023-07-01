@@ -1,0 +1,13 @@
+[profile.dev.package.askama_derive]
+opt-level = 3
+
+[profile.dev.package.maud_macros]
+opt-level = 3
+
+[workspace]
+members = [
+    "creme",
+    "creme_bundler",
+    "creme_macros",
+    "examples/*",
+]

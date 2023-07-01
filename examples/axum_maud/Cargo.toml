@@ -1,0 +1,17 @@
+[package]
+name = "creme_axum_maud_example"
+version = "0.1.0"
+edition = "2021"
+
+[build-dependencies]
+creme_bundler = { path = "../../creme_bundler" }
+
+[dependencies]
+creme = { path = "../../creme" }
+
+axum = "0.6.19"
+tokio = { version = "1.29.1", features = ["full"] }
+tower-http = { version = "0.4.3", features = ["fs"] }
+tower-livereload = { git = "https://github.com/leotaku/tower-livereload" }
+
+maud = { version = "0.25.0", features = ["axum"] }
