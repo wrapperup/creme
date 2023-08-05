@@ -14,8 +14,7 @@ mode and release mode.
 
 * Build-time bundler. Creme will bundle your assets when building for
 release. It provides a handy `asset!()` macro to reference your assets and
-ensures they exist at compile time. Assets are also embedded directly
-into the binary.
+ensures they exist at compile time.
 
 ## Features
 * 🔥 Fast Dev-Mode Iteration
@@ -40,7 +39,8 @@ fn main() -> CremeResult<()> {
     println!("cargo:rerun-if-changed=build.rs");
 
     Creme::new()
-        .from_build_rs()?
+        .out_dir_build_rs()? // builds the dist in OUT_DIR
+        // .out_dir("dist")? // builds the dist in the `dist` folder
         .recommended()?
         .bundle()
 }
