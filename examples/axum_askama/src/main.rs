@@ -14,6 +14,7 @@ async fn main() {
             creme::service!(not_found_handler.into_service())
         );
 
+    // Uncomment this to disable hot reloading in release mode.
     // #[cfg(debug_assertions)]
     let app = app.layer(
         tower_livereload::LiveReloadLayer::new()

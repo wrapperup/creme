@@ -1,6 +1,6 @@
 # crème 🍦
 
->⚠️ creme is in an experimental state. Use with caution!
+>⚠️ creme is in an experimental state, and incomplete. Use with caution!
 
 Creme is a simple, opinionated build-time asset bundler tool for 
 Rust websites, complete with compile-time checks.
