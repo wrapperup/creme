@@ -9,12 +9,15 @@ It's designed to be used with monolithic templated web apps, but it can
 be used with front-end frameworks like Dioxus and Leptos. Creme exists in
 two parts:
 
-* Tower middleware. This handles serving your assets in both dev
-mode and release mode.
-
 * Build-time bundler. Creme will bundle your assets when building for
 release. It provides a handy `asset!()` macro to reference your assets and
 ensures they exist at compile time.
+
+* Tower middleware (TODO). This handles serving your assets in both dev
+mode and release mode, and will support embedding assets into the binary.
+(Currently, you can simply use `ServeDir` from `tower-http`, which gets
+the job done. Creme sets a few environment variables to make it easy to
+configure.)
 
 ## Features
 * 🔥 Fast Dev-Mode Iteration
