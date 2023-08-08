@@ -8,8 +8,6 @@ fn main() -> CremeResult<()> {
     Creme::new()
         // .out_dir("./dist")
         .out_dir_build_rs()?
-        // .recommended()?
-        .default_config()?
-        .release()
+        .recommended()?
         .bundle()
 }

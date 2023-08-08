@@ -10,9 +10,11 @@ use tower_http::services::ServeDir;
 async fn main() {
     let app = Router::new()
         .route("/", get(index_handler))
-        .fallback_service(
-            creme::service!(not_found_handler.into_service())
-        );
+        .nest_service(
+            "/assets",
+            ServeDir::new(PathBuf::from(env!("CREME_ASSETS_DIR"))),
+        )
+        .fallback_service(ServeDir::new(PathBuf::from(env!("CREME_PUBLIC_DIR"))));
 
     // Uncomment this to disable hot reloading in release mode.
     // #[cfg(debug_assertions)]

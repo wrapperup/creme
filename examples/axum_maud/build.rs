@@ -6,6 +6,7 @@ fn main() -> CremeResult<()> {
     // Creme is a Rust asset bundler. It takes a directory of assets and
     // bundles them into a Rust module that can be used at runtime.
     Creme::new()
+        // .out_dir("./dist")
         .out_dir_build_rs()?
         .recommended()?
         .bundle()
