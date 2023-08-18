@@ -1,7 +1,10 @@
 pub use creme_macros::asset;
 pub use creme_macros::service;
 
-pub mod service;
+pub use mime;
+
+pub mod services;
+pub mod embed;
 
 #[macro_export]
 macro_rules! is_release {

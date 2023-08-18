@@ -10,7 +10,9 @@ readme = "README.md"
 [dependencies]
 bytes = "1.4.0"
 creme_macros = { path = "../creme_macros" }
+futures-util = "0.3.14"
 http = "0.2.9"
 http-body = "0.4.5"
+mime = "0.3.17"
 tower = "0.4.13"
 tower-http = { version = "0.4.3", features = ["fs"] }
