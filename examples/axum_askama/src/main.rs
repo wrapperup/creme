@@ -4,17 +4,20 @@ use askama::Template;
 use askama_axum::IntoResponse;
 use axum::{routing::get, Router, handler::HandlerWithoutStateExt, http::StatusCode};
 use creme::asset;
+use creme::services::CremeService;
 use tower_http::services::ServeDir;
+
+use creme::embed::{EmbeddedAssets, EmbeddedAsset};
 
 #[tokio::main]
 async fn main() {
+    println!("asset 1: {:?}", ASSETS.get(0));
     let app = Router::new()
         .route("/", get(index_handler))
-        .nest_service(
-            "/assets",
-            ServeDir::new(PathBuf::from(env!("CREME_ASSETS_DIR"))),
-        )
-        .fallback_service(ServeDir::new(PathBuf::from(env!("CREME_PUBLIC_DIR"))));
+        .fallback_service(CremeService::new(
+            PathBuf::from(env!("CREME_ASSETS_DIR")),
+            PathBuf::from(env!("CREME_PUBLIC_DIR"))
+        ));
 
     // Uncomment this to disable hot reloading in release mode.
     // #[cfg(debug_assertions)]

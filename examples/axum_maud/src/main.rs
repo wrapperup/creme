@@ -9,11 +9,10 @@ use tower_http::services::ServeDir;
 async fn main() {
     let app = Router::new()
         .route("/", get(index_handler))
-        .nest_service(
-            "/assets",
-            ServeDir::new(PathBuf::from(env!("CREME_ASSETS_DIR"))),
-        )
-        .fallback_service(ServeDir::new(PathBuf::from(env!("CREME_PUBLIC_DIR"))));
+        .fallback_service(CremeService::new(
+            PathBuf::from(env!("CREME_ASSETS_DIR")),
+            PathBuf::from(env!("CREME_PUBLIC_DIR"))
+        ));
 
     #[cfg(debug_assertions)]
     let app = app.layer(

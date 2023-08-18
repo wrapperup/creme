@@ -1,6 +1,6 @@
 # crème 🍦
 
->⚠️ creme is in an experimental state, and incomplete. Use with caution!
+>⚠️ creme is in an experimental state. Use with caution!
 
 Creme is a simple, opinionated build-time asset bundler tool for 
 Rust websites, complete with compile-time checks.
@@ -11,7 +11,8 @@ two parts:
 
 * Build-time bundler. Creme will bundle your assets when building for
 release. It provides a handy `asset!()` macro to reference your assets and
-ensures they exist at compile time.
+ensures they exist at compile time. Assets are also embedded directly
+into the binary.
 
 * Tower middleware (TODO). This handles serving your assets in both dev
 mode and release mode, and will support embedding assets into the binary.
@@ -42,8 +43,7 @@ fn main() -> CremeResult<()> {
     println!("cargo:rerun-if-changed=build.rs");
 
     Creme::new()
-        .out_dir_build_rs()? // builds the dist in OUT_DIR
-        // .out_dir("dist")? // builds the dist in the `dist` folder
+        .from_build_rs()?
         .recommended()?
         .bundle()
 }
