@@ -2,22 +2,14 @@ use std::path::PathBuf;
 
 use askama::Template;
 use askama_axum::IntoResponse;
-use axum::{routing::get, Router, handler::HandlerWithoutStateExt, http::StatusCode};
+use axum::{handler::HandlerWithoutStateExt, http::StatusCode, routing::get, Router};
 use creme::asset;
-use creme::services::CremeService;
-use tower_http::services::ServeDir;
-
-use creme::embed::{EmbeddedAssets, EmbeddedAsset};
 
 #[tokio::main]
 async fn main() {
-    println!("asset 1: {:?}", ASSETS.get(0));
     let app = Router::new()
         .route("/", get(index_handler))
-        .fallback_service(CremeService::new(
-            PathBuf::from(env!("CREME_ASSETS_DIR")),
-            PathBuf::from(env!("CREME_PUBLIC_DIR"))
-        ));
+        .fallback_service(creme::service!().fallback(not_found_handler.into_service()));
 
     // Uncomment this to disable hot reloading in release mode.
     // #[cfg(debug_assertions)]
