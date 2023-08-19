@@ -16,9 +16,8 @@ use tower_http::services::fs::{
 
 #[derive(Clone)]
 pub struct CremeDevService<F = DefaultServeDirFallback> {
-    asset_service: ServeDir<DefaultServeDirFallback>,
-    public_service: ServeDir<DefaultServeDirFallback>,
-    fallback: Option<F>,
+    asset_service: ServeDir<F>,
+    public_service: ServeDir<F>,
 }
 
 impl CremeDevService {
@@ -26,15 +25,18 @@ impl CremeDevService {
         Self {
             asset_service: ServeDir::new(assets_dir),
             public_service: ServeDir::new(public_dir),
-            fallback: None,
         }
     }
 
-    pub fn fallback<F2>(self, new_fallback: F2) -> CremeDevService<F2> {
-        CremeDevService::<F2> {
-            asset_service: self.asset_service,
-            public_service: self.public_service,
-            fallback: Some(new_fallback),
+    // TODO: This is a bit of a hack, requiring a clone.
+    // We can downcast the fallback service to get around this eventually.
+    pub fn fallback<F2>(self, new_fallback: F2) -> CremeDevService<F2>
+    where
+        F2: Clone,
+    {
+        CremeDevService {
+            asset_service: self.asset_service.fallback(new_fallback.clone()),
+            public_service: self.public_service.fallback(new_fallback),
         }
     }
 }
@@ -60,13 +62,7 @@ where
         let asset_ready = self.asset_service.poll_ready(cx);
         let public_ready = self.public_service.poll_ready(cx);
 
-        let fallback_ready = if let Some(fallback) = &mut self.fallback {
-            fallback.poll_ready(cx)
-        } else {
-            Poll::Ready(Ok(()))
-        };
-
-        if asset_ready.is_ready() && public_ready.is_ready() && fallback_ready.is_ready() {
+        if asset_ready.is_ready() && public_ready.is_ready() {
             Poll::Ready(Ok(()))
         } else {
             Poll::Pending
@@ -96,15 +92,11 @@ where
                 let response = result
                     .map(|response| Response::new(response.boxed_unsync()))
                     .unwrap_or_else(|_err| {
-                        if self.fallback.is_ready() {
-                            self.fallback.call(req).boxed()
-                        } else {
-                            let body = Empty::new().map_err(|err| match err {}).boxed_unsync();
-                            Response::builder()
-                                .status(StatusCode::INTERNAL_SERVER_ERROR)
-                                .body(body)
-                                .unwrap()
-                        }
+                        let body = Empty::new().map_err(|err| match err {}).boxed_unsync();
+                        Response::builder()
+                            .status(StatusCode::INTERNAL_SERVER_ERROR)
+                            .body(body)
+                            .unwrap()
                     });
                 Ok(response)
             })
