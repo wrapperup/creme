@@ -14,11 +14,9 @@ release. It provides a handy `asset!()` macro to reference your assets and
 ensures they exist at compile time. Assets are also embedded directly
 into the binary.
 
-* Tower middleware (TODO). This handles serving your assets in both dev
+* Tower middleware. This handles serving your assets in both dev
 mode and release mode, and will support embedding assets into the binary.
-(Currently, you can simply use `ServeDir` from `tower-http`, which gets
-the job done. Creme sets a few environment variables to make it easy to
-configure.)
+(Currently, release mode is not implemented.)
 
 ## Features
 * 🔥 Fast Dev-Mode Iteration
