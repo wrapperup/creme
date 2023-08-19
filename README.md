@@ -102,6 +102,24 @@ html! {
 }
 ```
 
+Creme includes a `tower` service for serving your assets during development.
+Simply use `creme::service!`, which will construct a `CremeDevService` with
+the correct paths you set in your build script.
+
+For example, in Axum (or any framework that supports `tower`)
+```rust
+let app = Router::new()
+    .route("/", get(index_handler))
+    .fallback_service(
+        creme::service!()
+            .fallback(not_found_handler.into_service())
+    );
+```
+
+(TODO) Optionally, during release, Creme will automatically embed and serve
+assets from the binary. This doesn't require any additional configuration,
+`creme::service!` handles it for you.
+
 For more, [see here for examples](/examples)
 
 ## Development Mode
