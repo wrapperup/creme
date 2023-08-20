@@ -7,7 +7,7 @@ server-side Rust websites, complete with compile-time checks and
 a fast dev server for quick iteration.
 
 ## Features
-* 🔥 Fast Dev-Mode Iteration
+* 🔥 Fast Dev-Mode Server
 * 📁 Static File Handling
 * 🔎 Cache Busting
 * ⚡ CSS Bundling With LightningCSS
