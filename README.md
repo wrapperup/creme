@@ -39,7 +39,10 @@ my_website/
             └── _mod2.css
 ```
 
-In `build.rs`, add:
+Configure Creme in your `build.rs` script, using the included builder.
+
+Creme lets you either embed assets into the binary for quick and easy deployment,
+or to a directory of your choice for deploying to a CDN.
 
 ```rust
 use creme_bundler::{Creme, CremeResult};
@@ -49,7 +52,8 @@ fn main() -> CremeResult<()> {
     println!("cargo:rerun-if-changed=build.rs");
 
     Creme::new()
-        .from_build_rs()? // Prepares assets to be embedded into the binary.
+        .out_dir("dist")? // Outputs assets to the `dist` directory, for CDN deployment.
+        // .embedded()? // Or prepare assets to be embedded into the binary and served directly.
         .recommended()? // Reads from `public` and `assets` folder.
         .bundle()
 }
