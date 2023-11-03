@@ -4,7 +4,7 @@ use lightningcss::{
     bundler::{Bundler, FileProvider},
     dependencies::DependencyOptions,
     error::{Error as LightningCssError, PrinterErrorKind},
-    stylesheet::{ParserOptions, PrinterOptions},
+    stylesheet::{ParserOptions, PrinterOptions, MinifyOptions},
     targets::Targets,
 };
 use once_cell::sync::Lazy;
@@ -17,8 +17,6 @@ use crate::MANIFEST;
 pub enum BundleError {
     #[error("bundler error: {0}")]
     Bundler(String),
-    #[error("browsers error: {0}")]
-    Browsers(#[from] browserslist::Error),
     #[error("print error: {0}")]
     Print(#[from] LightningCssError<PrinterErrorKind>),
 }
@@ -58,12 +56,19 @@ pub(crate) fn process_css(
 ) -> String {
     // let mut bundler = Bundler::new_with_at_rule_parser(&*FILE_PROVIDER, None, parser_options);
     let mut bundler = Bundler::new(&*FILE_PROVIDER, None, parser_options);
-    let stylesheet = bundler.bundle(path).unwrap();
+    let mut stylesheet = bundler.bundle(path).unwrap();
+
+    let targets = targets.into();
+
+    stylesheet.minify(MinifyOptions {
+        targets,
+        ..Default::default()
+    }).unwrap();
 
     let css = stylesheet
         .to_css(PrinterOptions {
             minify: true,
-            targets: targets.into(),
+            targets,
             analyze_dependencies: Some(DependencyOptions {
                 remove_imports: false,
             }),

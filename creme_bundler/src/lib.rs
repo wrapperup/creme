@@ -508,8 +508,7 @@ impl CremeBundler {
                     ..Default::default()
                 };
 
-                let targets = Browsers::from_browserslist([">= 0.25%"])
-                    .map_err(|e| CremeError::Css(css::BundleError::Browsers(e)))?;
+                let targets = lightningcss::targets::Browsers::from_browserslist([">= 0.25%"]).unwrap();
 
                 css::process_css(&path, parser_options, targets, assets_dir).into_bytes()
             }
